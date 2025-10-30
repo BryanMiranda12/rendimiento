@@ -6,66 +6,67 @@
 
     <style>
         body {
-            background-color: #e3f2fd
-            font-family: "Segoe UI", Arial, sans-serif
-            text-align: center
-            margin: 0
-            padding: 0
+            background-color: #eeeeee;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         h1 {
-            margin-top: 25px
-            color: #0d47a1
+            margin-top: 20px;
         }
 
         .contenedor {
-            width: 75%
-            background: #ffffff
-            margin: 30px auto
-            padding: 20px
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1)
-            border-radius: 10px
-            display: flex
-            flex-direction: column
-            align-items: center
+            width: 70%;
+            background: white;
+            margin: auto;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
 
+        /* 🔹 Nuevo estilo de la tabla */
         table {
-            width: 80%
-            border-collapse: collapse
-            margin-top: 20px
-            margin: 0 auto /* centra la tabla */
-            border-radius: 10px
-            overflow: hidden
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 15px;
         }
 
         th, td {
-            padding: 10px
-            text-align: center
+            padding: 10px 12px;
+            text-align: center;
         }
 
         th {
-            background-color: #1565c0
-            color: white
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f7fb
+            background-color: #f9f9f9;
         }
 
         tr:hover {
-            background-color: #bbdefb
+            background-color: #eaf4e8;
+            transition: background-color 0.3s;
         }
 
         td {
-            border-bottom: 1px solid #ddd
+            border-bottom: 1px solid #ddd;
+        }
+
+        th:first-child {
+            border-top-left-radius: 6px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 6px;
         }
 
         .rendimiento {
-            font-weight: bold
-            font-size: 18px
-            padding: 10px
-            display: inline-block
+            font-weight: bold;
         }
     </style>
 </head>
@@ -75,65 +76,65 @@
 
 <script>
 
-    let operario = prompt("Ingrese el nombre del operario:")
-    let produccion = []
-    let continuar = "si"
+    let operario = prompt("Ingrese el nombre del operario:");
+    let produccion = [];
+    let continuar = "si";
 
     while (continuar.toLowerCase() === "si") {
 
-        let producto = prompt("Ingrese el tipo de producto (A, B o C):")
-        let costoUnitario = 0
+        let producto = prompt("Ingrese el tipo de producto (A, B o C):");
+        let costoUnitario = 0;
 
         switch (producto.toUpperCase()) {
             case "A":
-                costoUnitario = 5000
-                producto = "Componente A"
-                break
+                costoUnitario = 5000;
+                producto = "Componente A";
+                break;
             case "B":
-                costoUnitario = 7000
-                producto = "Componente B"
-                break
+                costoUnitario = 7000;
+                producto = "Componente B";
+                break;
             case "C":
-                costoUnitario = 10000
-                producto = "Componente C"
-                break
+                costoUnitario = 10000;
+                producto = "Componente C";
+                break;
             default:
-                alert("Producto inválido, se asigna Componente A")
-                costoUnitario = 5000
-                producto = "Componente A"
+                alert("Producto inválido, se asigna Componente A");
+                costoUnitario = 5000;
+                producto = "Componente A";
         }
 
-        let piezas = parseInt(prompt("Ingrese piezas producidas hoy:"))
+        let piezas = parseInt(prompt("Ingrese piezas producidas hoy:"));
 
         produccion.push({
             producto: producto,
             piezas: piezas,
             costo: costoUnitario
-        })
+        });
 
-        continuar = prompt("¿Registrar otro día? (si/no)")
+        continuar = prompt("¿Registrar otro día? (si/no)");
     }
 
-    let totalPiezas = 0
-    let costoTotal = 0
+    let totalPiezas = 0;
+    let costoTotal = 0;
 
     for (let i = 0; i < produccion.length; i++) {
-        totalPiezas += produccion[i].piezas
-        costoTotal += produccion[i].piezas * produccion[i].costo
+        totalPiezas += produccion[i].piezas;
+        costoTotal += produccion[i].piezas * produccion[i].costo;
     }
 
-    let rendimiento = ""
-    let color = ""
+    let rendimiento = "";
+    let color = "";
 
     if (totalPiezas < 50) {
-        rendimiento = "Bajo rendimiento"
-        color = "#e53935"
+        rendimiento = "Bajo rendimiento";
+        color = "red";
     } else if (totalPiezas <= 100) {
-        rendimiento = "Rendimiento aceptable"
-        color = "#f9a825"
+        rendimiento = "Rendimiento aceptable";
+        color = "orange";
     } else {
-        rendimiento = "Rendimiento excelente"
-        color = "#2e7d32"
+        rendimiento = "Rendimiento excelente";
+        color = "green";
     }
 
     document.write(
@@ -141,32 +142,32 @@
         "<strong>Operario:</strong> " + operario + "<br><br>" +
         "<table>" +
         "<tr><th>Día</th><th>Producto</th><th>Piezas</th><th>Costo Unitario</th><th>Costo Total Día</th></tr>"
-    )
+    );
 
     for (let i = 0; i < produccion.length; i++) {
-        let costoDia = produccion[i].piezas * produccion[i].costo
+        let costoDia = produccion[i].piezas * produccion[i].costo;
         document.write(
             "<tr>" +
             "<td>" + (i + 1) + "</td>" +
             "<td>" + produccion[i].producto + "</td>" +
             "<td>" + produccion[i].piezas + "</td>" +
-            "<td>$" + produccion[i].costo.toLocaleString("es-CL") + "</td>" +
-            "<td>$" + costoDia.toLocaleString("es-CL") + "</td>" +
+            "<td>$" + produccion[i].costo + "</td>" +
+            "<td>$" + costoDia + "</td>" +
             "</tr>"
-        )
+        );
     }
 
     document.write(
-        "<tr style='font-weight:bold; background-color:#e3f2fd'>" +
-        "<td colspan='2'>Totales</td>" +
-        "<td>" + totalPiezas + "</td>" +
-        "<td></td>" +
-        "<td>$" + costoTotal.toLocaleString("es-CL") + "</td>" +
+        "<tr>" +
+        "<th colspan='2'>Totales</th>" +
+        "<th>" + totalPiezas + "</th>" +
+        "<th></th>" +
+        "<th>$" + costoTotal + "</th>" +
         "</tr>" +
         "</table>" +
         "<br><span class='rendimiento' style='color:" + color + "'>Rendimiento: " + rendimiento + "</span>" +
         "</div>"
-    )
+    );
 
 </script>
 
